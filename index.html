@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> TE AMO MUCHO</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+/* 💜 FONDO Y ESTILOS BASE */
+body {
+  margin: 0;
+  background: linear-gradient(-45deg, #e6ccff, #d9b3ff, #f3e6ff, #c299ff);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  color: #4b0082;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(white 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.clock-container {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  padding: 12px 18px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+section {
+  width: 100%;
+  min-height: 100vh;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.member-card {
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.member-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.member-card:hover .member-img {
+  transform: scale(1.1) rotate(5deg);
+  border-color: #c299ff;
+}
+
+.member-name {
+  margin-top: 10px;
+  font-weight: 600;
+  display: block;
+}
+
+#message-display {
+  margin-top: 30px;
+  padding: 25px;
+  background: white;
+  border-radius: 20px;
+  max-width: 500px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 15px 35px rgba(128,0,128,0.2);
+  border: 2px solid #e6ccff;
+  font-style: italic;
+  font-size: 1.1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+
+#message-display.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.distance-box {
+  background: white;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  max-width: 600px;
+}
+
+.btn {
+  background: #c8a2ff;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 0 20px #c8a2ff;
+  transition: 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+@keyframes rise {
+  from { transform: translateY(0); opacity: 0; }
+  to { transform: translateY(-110vh); opacity: 0.8; }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div class="stars"></div>
+
+<div class="clock-container">
+  <div>📍 Mi hora: <span id="clock1"></span></div>
+  <div>💜 Tu hora: <span id="clock2"></span></div>
+</div>
+
+<section>
+  <h1>TE AMO MUCHO Kimberly 💜</h1>
+  <p>Toca a cada uno para ver qué tienen que decirte...</p>
+  <a href="#magic" class="btn" onclick="playMusic()">Abrir</a>
+</section>
+
+<section id="magic">
+  <div class="members-grid">
+    <div class="member-card" onclick="showMessage('J-Hope', 'Kimberly, eres mi motor cada día. Nunca dejes de sonreír, me encanta tu sonrisa. 🌞')">
+      <img src="jhope.jpg" alt="J-Hope" class="member-img">
+      <span class="member-name">J-Hope</span>
+    </div>
+    <div class="member-card" onclick="showMessage('Suga', 'Tu calma me da la paz que necesito en medio del caos. Te quiero. 🎶')">
+      <img src="suga.jpg" alt="Suga" class="member-img">
+      <span class="member-name">Suga</span>
+    </div>
+    <div class="member-card" onclick="showMessage('RM', 'Eres increíble, me encanta todo de ti, eres mi persona perfecta y siempre lo serás. 💜')">
+      <img src="rm.jpg" alt="RM" class="member-img">
+      <span class="member-name">RM</span>
+    </div>
+    <div class="member-card" onclick="showMessage('Jin', 'Tu belleza no tiene comparación, brillas más que cualquier estrella. ✨')">
+      <img src="jin.jpg" alt="Jin" class="member-img">
+      <span class="member-name">Jin</span>
+    </div>
+    <div class="member-card" onclick="showMessage('Jungkook', 'Eres mi mayor tesoro, mi chica dorada. 💜')">
+      <img src="jungkook.jpg" alt="Jungkook" class="member-img">
+      <span class="member-name">Jungkook</span>
+    </div>
+    <div class="member-card" onclick="showMessage('Jimin', 'Gracias por tu dulzura infinita. Siempre estaré cuidándote aunque de lejos por el momento. 💕')">
+      <img src="jimin.jpg" alt="Jimin" class="member-img">
+      <span class="member-name">Jimin</span>
+    </div>
+    <div class="member-card" onclick="showMessage('V', 'Tu mirada es mágica y me pierdo en ella cada que la miro. Eres única. ✨')">
+      <img src="v.jpg" alt="V" class="member-img">
+      <span class="member-name">V</span>
+    </div>
+  </div>
+
+  <div id="message-display">Haz clic en un miembro para leer su mensaje...</div>
+</section>
+
+<section>
+  <h2 style="font-family:'Playfair Display';">ME GUSTÓ LA CANCIÓN 🎵</h2>
+  <div class="distance-box">
+    <p><strong>Boy With Luv</strong></p>
+    <p><i>"Tengo curiosidad por todo, ¿cómo estuvo tu día? Dime... ¿qué es lo que te hace feliz? Oh, mándame un mensaje..."</i></p>
+  </div>
+</section>
+
+<section>
+  <h1>QUERÍA DECIRTE MI AMOR</h1>
+  <div class="distance-box">
+    <p>Aunque estemos en países distintos y con horarios diferentes, me encanta sentirte tan cerca. Gracias por compartir tu día a día conmigo. Te quiero, MI REINA, MI AMOR TE AMO MUCHISIMO. 💜</p>
+  </div>
+</section>
+
+<script>
+/* FUNCIÓN PARA LA MÚSICA */
+function playMusic() {
+  const music = document.getElementById('bgMusic');
+  music.play().catch(error => {
+    console.log("El navegador bloqueó el inicio automático, pero se intentó reproducir.");
+  });
+}
+
+function showMessage(name, text) {
+  const display = document.getElementById('message-display');
+  display.classList.remove('show');
+  
+  setTimeout(() => {
+    display.innerHTML = `<strong>${name}:</strong> "${text}"`;
+    display.classList.add('show');
+  }, 100);
+}
+
+function updateClocks(){
+  const now = new Date();
+  const herTime = new Date(now.getTime() - (2 * 60 * 60 * 1000));
+  document.getElementById("clock1").innerText = now.toLocaleTimeString();
+  document.getElementById("clock2").innerText = herTime.toLocaleTimeString();
+}
+setInterval(updateClocks,1000);
+updateClocks();
+
+function createHearts() {
+  for(let i=0; i<10; i++){
+    let heart = document.createElement("div");
+    heart.innerHTML = "💜";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "-20px";
+    heart.style.fontSize = (Math.random() * 10 + 15) + "px";
+    heart.style.opacity = "0.4";
+    heart.style.zIndex = "1";
+    heart.style.animation = `rise ${Math.random() * 5 + 10}s linear infinite`;
+    heart.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(heart);
+  }
+}
+createHearts();
+</script>
+
+</body>
+</html>
